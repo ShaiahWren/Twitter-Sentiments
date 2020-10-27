@@ -34,17 +34,17 @@ class TwitterName extends Component {
     return (
         <div>
         <label>
-          Enter a Twitter Handle and find the most recent tweet:
+          {/* <p>Enter a Twitter Handle and find the most recent tweet:</p> */}
           <input
-            placeholder="Shaiah Emigh-Doyle"
+            placeholder="@CardiBFranceFR"
             type="text"
             value={this.state.userName}
             onChange={(e) => this.setState({ userName: e.target.value})}
           />
         </label>
-          <button onClick={this.senduserName}>
-            find most recent tweet
-          </button>
+          <p><button onClick={this.senduserName}>
+            <p>Calculate</p>
+          </button></p>
           <SentimentCalculate tweetContent={this.state.tweetContent} userName={this.state.userName} />
 
         </div>
