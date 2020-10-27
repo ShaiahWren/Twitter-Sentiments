@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Button } from 'bloomer/lib/elements/Button';
+// import { Card } from 'bloomer/lib/elements/Card';
+
+
 import unirest from 'unirest';
 import PhoneNumber from './PhoneNumber';
 require('dotenv').config()
+
+const Tweet = styled.div`
+
+`
+
 
 class SentimentCalculate extends Component {
 
@@ -10,7 +20,8 @@ class SentimentCalculate extends Component {
         this.state = {
             tweetContent: props.tweetContent,
             userName: props.userName,
-            score: ''
+            score: '',
+            sentiment: ''
         };
     }
 
@@ -19,13 +30,18 @@ class SentimentCalculate extends Component {
         event.preventDefault();
         unirest.post("https://microsoft-text-analytics1.p.rapidapi.com/sentiment")
             .header("X-RapidAPI-Host", "microsoft-text-analytics1.p.rapidapi.com")
-            .header("X-RapidAPI-Key", process.env.REACT_APP_RAPIDAPI_KEY)
+            .header("X-RapidAPI-Key", `${process.env.REACT_APP_RAPIDAPI_KEY}`)
             .header("Content-Type", "application/json")
             .send({ "documents": [{ "language": "en", "id": "string", "text": this.props.tweetContent }] })
             .end((result) => {
-                const newScore = result.body.documents[0].score
+                const newSentiment = result.body.documents[0].sentiment;
+                const newScore = result.body.documents[0].confidenceScores[newSentiment];
+                const test = result.body.documents;
+                console.log("This is the test! ", test);
+
                 console.log("The score is:", newScore)
-                this.setState({ score: newScore })
+                this.setState({ score: newScore, sentiment: newSentiment })
+
             });
     }
 
@@ -33,10 +49,12 @@ class SentimentCalculate extends Component {
         if (this.props.tweetContent) {
             return (
                 <div>
-                    {this.props.tweetContent}
-                    <button onClick={this.calculateSentiment}>
-                        Calculate sentiment score
-                    </button>
+                  
+                        {this.props.tweetContent}
+                   
+                    <p><Button onClick={this.calculateSentiment}>
+                        Calculate
+                    </Button></p>
                 </div>
             )
         }
@@ -46,8 +64,11 @@ class SentimentCalculate extends Component {
     render() {
         return (
             <div>
+                <Tweet>
                 {this.showTweet()}
-                {this.state.score && `Tweet's sentiment score: ${this.state.score}`}
+                </Tweet>
+                <p>{this.state.score && `Sentiment score: ${this.state.score}`}</p>
+                <p>{this.state.sentiment && `Plain text: ${this.state.sentiment}`}</p>
                 <PhoneNumber score={this.state.score} tweetContent={this.props.tweetContent} userName={this.props.userName} />
             </div>
         )
