@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Button } from 'bloomer/lib/elements/Button';
-// import { Card } from 'bloomer/lib/elements/Card';
 
 
 import unirest from 'unirest';

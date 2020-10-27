@@ -1,14 +1,16 @@
 import React from 'react';
 import TwitterName from './components/TwitterName';
+import About from './components/About';
 import styled from 'styled-components';
 import './App.css';
-import { Button, Label, NavbarLink, Title, NavbarMenu, Control, Field, NavbarStart, Navbar, NavbarEnd, NavbarDropdown, NavbarBrand, NavbarBurger, NavbarItem, Icon  } from 'bloomer/lib/elements/Button';
 import bulma from 'bulma/css/bulma.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 const Wrapper = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;
+  min-height: 100vh;
   align-items: center;
 
 `
@@ -18,10 +20,16 @@ const Wrapper = styled.div`
 function App() {
   return (
     <div className="App">
-    
-      <Wrapper>
-        <TwitterName />
-      </Wrapper>
+      <Router>
+        <Route exact path="/"> 
+        <Wrapper>
+          <TwitterName />
+        </Wrapper>
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </Router>
     </div>
   );
 }

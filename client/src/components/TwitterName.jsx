@@ -10,8 +10,18 @@ const InputBox = styled.div`
   margin: auto;
 
   input {
-    font-size: 20px;
+    font-size: 50px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: hidden;
+    border-radius: 6px;
+    padding: 12px;
+    border: solid 2px #073b4c;
   }
+  textarea:focus, input:focus{
+    outline: none;
+}
   
   p {
     padding: 12px;
@@ -64,8 +74,8 @@ class TwitterName extends Component {
             />
           </label>
 
-          <p><Button onClick={this.senduserName}>
-            Tweets
+          <p><Button className="button is-blue" onClick={this.senduserName}>
+            Mine Tweets
           </Button></p>
           <SentimentCalculate tweetContent={this.state.tweetContent} userName={this.state.userName} />
         </InputBox>
