@@ -23,6 +23,8 @@ function App() {
       <Router>
         <Route exact path="/"> 
         <Wrapper>
+          
+      
           <TwitterName />
         </Wrapper>
         </Route>

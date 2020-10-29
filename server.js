@@ -37,8 +37,8 @@ app.post('/userName', function(req, res) {
     var username = {screen_name: userName };
     client.get('statuses/user_timeline', username, function(error, tweets, response) {
       if (!error) {
-        console.log(`most recent tweet: `, tweets[0].text);
-        res.json(tweets[0].text)
+        console.log(`most recent tweet: `, tweets[0]);
+        res.json(tweets[0])
       }
     });
   });

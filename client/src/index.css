@@ -5,10 +5,15 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background:linear-gradient(to left, #073b4c 20%,#118ab2 20%,#118ab2 40%, #118ab2 40%, #118ab2 60%, #118ab2, #118ab2 80%, #118ab2 80%, #073b4c 80%);
+  background:linear-gradient(to left, #219EBC 20%,#219EBC 20%,#219EBC 40%, #219EBC 40%, #219EBC 60%, #219EBC, #219EBC 80%, #219EBC 80%, #219EBC 80%);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.minetweet {
+  background-color: #FFB703;
+  color: #023047;
 }

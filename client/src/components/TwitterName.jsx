@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import SentimentCalculate from './SentimentCalculate';
 import { Button } from 'bloomer/lib/elements/Button';
 import styled from 'styled-components';
-import bulma from 'bulma/css/bulma.css';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import LinearProgress from '@material-ui/core/LinearProgress';
+// import Button from '@material-ui/core/Button';
+import './TwitterName.css';
+import Navbar from './Navbar';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const InputBox = styled.div`
   width: 100%;
@@ -26,7 +31,55 @@ const InputBox = styled.div`
   p {
     padding: 12px;
   }
+
 `
+
+const Spinner = styled.div`
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+
+`
+
+const MineTweet = styled.p`
+
+  background-color: #FFB703;
+  color: #023047;
+  width: 150px;
+  margin: 0 auto;
+  padding: 12px;
+  
+
+
+`
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#8ECAE6',
+      main: '#FB8500',
+      dark: '#FFB703',
+      
+      contrastText: '#023047',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
+
+const Header = styled.div`
+  margin: 0 auto;
+  font-size: 50px;
+  color: #fb8500;
+
+`
+
+
+
 
 
 
@@ -34,13 +87,15 @@ class TwitterName extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
-      tweetContent: '',
+      userName: '@MichelleObama',
+      tweetContent: {},
+      tweetSpinner: false
     };
   }
 
   senduserName = (event) => {
     event.preventDefault();
+
     fetch('/userName', {
       method: 'post',
       headers: {
@@ -49,35 +104,54 @@ class TwitterName extends Component {
       body: JSON.stringify({ userName: this.state.userName })
     })
     this.getTweet()
-    this.setState({userName: ''});
+    this.setState({ userName: this.state.userName, tweetSpinner: true });
+    setTimeout(() => { this.setState({ tweetSpinner: false }) }, 3000);
   }
+
+
 
   getTweet = (event) => {
     fetch('/twitter')
       .then(res => res.json())
       .then(tweetContent => this.setState({ tweetContent }, () => console.log('tweet fetched: ', tweetContent)))
+   
   }
 
 
 
   render() {
+    const { tweetSpinner } = this.state;
     return (
       <>
+        <Navbar/>
+        
         <InputBox>
           <label>
-            {/* <p></p> */}
+            {/* <Header>
+              <h1>senTWEETments</h1>
+            </Header> */}
+         
             <input
-              placeholder="@CardiBFranceFR"
+              placeholder="@MichelleObama"
               type="text"
               value={this.state.userName}
               onChange={(e) => this.setState({ userName: e.target.value })}
             />
           </label>
+          
+         <p><Button onClick={this.senduserName} >
+          Mine Tweet
+        </Button></p>
 
-          <p><Button className="button is-blue" onClick={this.senduserName}>
-            Mine Tweets
-          </Button></p>
-          <SentimentCalculate tweetContent={this.state.tweetContent} userName={this.state.userName} />
+
+          {tweetSpinner ? (
+            <Spinner>
+              <LinearProgress />
+              </Spinner>
+            
+          ) : (
+              <SentimentCalculate tweetContent={this.state.tweetContent} userName={this.state.userName} />
+            )}
         </InputBox>
       </>
     )
