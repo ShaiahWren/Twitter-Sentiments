@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from 'bloomer/lib/elements/Button';
+// import { Button } from 'bloomer/lib/elements/Button';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -8,6 +8,10 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import TodayIcon from '@material-ui/icons/Today';
+import Button from '@material-ui/core/Button';
+
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import { CardHeaderIcon, Icon, CardHeaderTitle, Image, Subtitle, Content, Media, MediaLeft, MediaContent, CardImage, Title } from 'bloomer';
 
 
@@ -59,6 +63,9 @@ class SentimentCalculate extends Component {
     if (this.props.tweetContent.text) {
       return (
         <div>
+           <p><Button variant="contained" className="calculate" onClick={this.calculateSentiment}>
+            Calculate
+                    </Button></p>
           <TweetCard>
 
             <Card>
@@ -79,12 +86,13 @@ class SentimentCalculate extends Component {
                     <Image isSize='20x20' src={this.props.tweetContent.user.profile_image_url_https} />
                   </MediaLeft>
                   <MediaLeft>
-                    <FavoriteIcon/>{this.props.tweetContent.user.name}
+                  
                   </MediaLeft>
                   <MediaContent>
                     <Title isSize={4}>{this.props.tweetContent.user.name}</Title>
-                    <Subtitle isSize={6}>{`@${this.props.tweetContent.user.screen_name} `}<LocationOnIcon/>{this.props.tweetContent.user.location}</Subtitle>
                     <Subtitle isSize={6}>{`"${this.props.tweetContent.user.description}" `}</Subtitle>
+                    <Subtitle isSize={6}>{`@${this.props.tweetContent.user.screen_name} `}<br></br><LocationOnIcon/>{this.props.tweetContent.user.location}  <FavoriteIcon/>{this.props.tweetContent.user.favourites_count}<br></br><SupervisedUserCircleIcon/>{this.props.tweetContent.user.followers_count}<br></br><TodayIcon/>{this.props.tweetContent.user.created_at}.</Subtitle>
+                   
 
                   </MediaContent>
                 </Media>
@@ -110,9 +118,7 @@ class SentimentCalculate extends Component {
           
           
 
-          <p><Button isColor="#FB8500" onClick={this.calculateSentiment}>
-            Calculate
-                    </Button></p>
+         
         </div>
       )
     }

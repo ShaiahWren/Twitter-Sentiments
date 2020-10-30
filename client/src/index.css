@@ -8,12 +8,77 @@ body {
   background:linear-gradient(to left, #219EBC 20%,#219EBC 20%,#219EBC 40%, #219EBC 40%, #219EBC 60%, #219EBC, #219EBC 80%, #219EBC 80%, #219EBC 80%);
 }
 
+html {
+  color: #219EBC;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
-.minetweet {
+p .minetweet {
   background-color: #FFB703;
   color: #023047;
 }
+
+p .minetweet:active {
+  background-color: #FFB703;
+  color: #023047;
+}
+p .minetweet:after {
+  background-color: #FFB703;
+  color: #023047;
+}
+
+p .minetweet:visited {
+  background-color: #FFB703;
+  color: #023047;
+}
+
+p .minetweet:focus {
+  background-color: #FFB703;
+  color: #023047;
+}
+
+p .calculate {
+  background-color: #fb8500;
+  color: 023047;
+}
+
+p .calculate:active {
+  background-color: #fb8500;
+  color: #023047;
+}
+
+p .calculate:after {
+  background-color: #fb8500;
+  color: #023047;
+}
+
+p .calculate:focus {
+  background-color: #fb8500;
+  color: #023047;
+}
+
+p .calculate:visited {
+  background-color: #fb8500;
+  color: #023047;
+}
+
+
+/* @media screen and (max-width: 375px) {
+  .inputBox {
+    text-align: center;
+    margin: 0 auto;
+    width: 300px;
+    height: 70px;
+    justify-content: center;
+    font-size: small;
+  
+  }
+  
+
+} */
+
+

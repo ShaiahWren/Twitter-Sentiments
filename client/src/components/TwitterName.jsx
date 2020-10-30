@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import SentimentCalculate from './SentimentCalculate';
-import { Button } from 'bloomer/lib/elements/Button';
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -9,6 +11,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import './TwitterName.css';
 import Navbar from './Navbar';
 import { createMuiTheme } from '@material-ui/core/styles';
+
 
 const InputBox = styled.div`
   width: 100%;
@@ -78,6 +81,21 @@ const Header = styled.div`
 
 `
 
+// const StyledButton = makeStyles({
+//   root: {
+//     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+//     borderRadius: 3,
+//     border: 0,
+//     color: 'white',
+//     height: 48,
+//     padding: '0 30px',
+//     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+//   },
+//   label: {
+//     textTransform: 'capitalize',
+//   },
+// })(Button);
+
 
 
 
@@ -119,6 +137,7 @@ class TwitterName extends Component {
 
 
 
+
   render() {
     const { tweetSpinner } = this.state;
     return (
@@ -132,14 +151,14 @@ class TwitterName extends Component {
             </Header> */}
          
             <input
-              placeholder="@MichelleObama"
+              placeholder="@MichelleObama" className="inputBox"
               type="text"
               value={this.state.userName}
               onChange={(e) => this.setState({ userName: e.target.value })}
             />
           </label>
           
-         <p><Button onClick={this.senduserName} >
+         <p><Button variant="contained" className="minetweet" onClick={this.senduserName} >
           Mine Tweet
         </Button></p>
 

@@ -3,13 +3,13 @@
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
     width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     background-color: #023047; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding-top: 20px;
+    position: fixed;
   }
   
   /* The navigation menu links */
@@ -82,7 +82,13 @@
   }
   
   /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
+  /* @media screen and (max-width: 375px) {
+    .sidenav {
+      padding-top: 15px;
+      display: none;
+    
+    
+    }
     .sidenav a {font-size: 18px;}
-  }
+
+  } */
