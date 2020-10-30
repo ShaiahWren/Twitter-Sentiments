@@ -10,7 +10,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import TodayIcon from '@material-ui/icons/Today';
 import Button from '@material-ui/core/Button';
-
+import ThumbsUpDownIcon from '@material-ui/icons/ThumbsUpDown';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import { CardHeaderIcon, Icon, CardHeaderTitle, Image, Subtitle, Content, Media, MediaLeft, MediaContent, CardImage, Title } from 'bloomer';
 
@@ -24,6 +24,19 @@ const TweetCard = styled.div`
   width: 500px;
   min-height: 500px;
 `
+const SentCard = styled.div`
+  margin: 0 auto;
+  width: 300px;
+  min-height: 300px;
+ 
+`
+const Calculator = styled.div`
+  width: 500px;
+  text-align: center;
+  margin: 0 auto;
+
+`
+
 
 
 class SentimentCalculate extends Component {
@@ -35,7 +48,8 @@ class SentimentCalculate extends Component {
       // name: props.user.name,
       userName: props.userName,
       score: '',
-      sentiment: ''
+      sentiment: '',
+      calculate: false
     };
   }
 
@@ -55,6 +69,8 @@ class SentimentCalculate extends Component {
 
         console.log("The score is:", newScore)
         this.setState({ score: newScore, sentiment: newSentiment })
+        setTimeout(() => { this.setState({ calculate: true }) },200);
+
 
       });
   }
@@ -63,7 +79,7 @@ class SentimentCalculate extends Component {
     if (this.props.tweetContent.text) {
       return (
         <div>
-           <p><Button variant="contained" className="calculate" onClick={this.calculateSentiment}>
+          <p><Button variant="contained" className="calculate" onClick={this.calculateSentiment}>
             Calculate
                     </Button></p>
           <TweetCard>
@@ -86,13 +102,13 @@ class SentimentCalculate extends Component {
                     <Image isSize='20x20' src={this.props.tweetContent.user.profile_image_url_https} />
                   </MediaLeft>
                   <MediaLeft>
-                  
+
                   </MediaLeft>
                   <MediaContent>
                     <Title isSize={4}>{this.props.tweetContent.user.name}</Title>
                     <Subtitle isSize={6}>{`"${this.props.tweetContent.user.description}" `}</Subtitle>
-                    <Subtitle isSize={6}>{`@${this.props.tweetContent.user.screen_name} `}<br></br><LocationOnIcon/>{this.props.tweetContent.user.location}  <FavoriteIcon/>{this.props.tweetContent.user.favourites_count}<br></br><SupervisedUserCircleIcon/>{this.props.tweetContent.user.followers_count}<br></br><TodayIcon/>{this.props.tweetContent.user.created_at}.</Subtitle>
-                   
+                    <Subtitle isSize={6}>{`@${this.props.tweetContent.user.screen_name} `}<br></br><LocationOnIcon />{this.props.tweetContent.user.location}  <FavoriteIcon />{this.props.tweetContent.user.favourites_count}<br></br><SupervisedUserCircleIcon />{this.props.tweetContent.user.followers_count}<br></br><TodayIcon />{this.props.tweetContent.user.created_at}.</Subtitle>
+
 
                   </MediaContent>
                 </Media>
@@ -101,13 +117,12 @@ class SentimentCalculate extends Component {
                   <MediaLeft>
                   </MediaLeft>
                   <MediaContent>
-                    
 
                   </MediaContent>
                 </Media>
 
                 <Content>
-                {this.props.tweetContent.text}
+                  {this.props.tweetContent.text}
                   <br />
                   <small>{this.props.tweetContent.created_at}</small>
                 </Content>
@@ -115,10 +130,10 @@ class SentimentCalculate extends Component {
             </Card>
           </TweetCard>
 
-          
-          
 
-         
+
+
+
         </div>
       )
     }
@@ -126,6 +141,8 @@ class SentimentCalculate extends Component {
 
 
   render() {
+    const { calculate } = this.state;
+
     return (
       <>
         <div>
@@ -135,8 +152,43 @@ class SentimentCalculate extends Component {
 
           <p>{this.showTweet()}</p>
 
-          <p>{this.state.score && `Sentiment score: ${this.state.score}`}</p>
-          <p>{this.state.sentiment && `Plain text: ${this.state.sentiment}`}</p>
+          {/* <p>{this.state.score && `Sentiment score: ${this.state.score}`}</p>
+          <p>{this.state.sentiment && `Plain text: ${this.state.sentiment}`}</p> */}
+
+          {calculate === false ? (
+            <Calculator>
+              <p></p>
+              {/* <LinearProgress /> */}
+            </Calculator>
+
+          ) : (
+           
+          <SentCard>
+            <Card className="sentiments">
+              <CardHeader className="sent-header">
+                <CardHeaderTitle>
+                  <ThumbsUpDownIcon style={{ fontSize: 80 }} />
+                </CardHeaderTitle>
+                <CardHeaderIcon>
+                  <Icon className="fa fa-angle-down" />
+                </CardHeaderIcon>
+              </CardHeader>
+
+              <CardContent className="sentiments">
+
+                <Content >
+
+                  <p>{this.state.score && `Sentiment score: ${this.state.score}`}</p>
+                  <ThumbsUpDownIcon className="thumbs" style={{ fontSize: 50 }} />
+
+                  <p>{this.state.sentiment && `${this.state.sentiment}`}</p>
+                  <br />
+                </Content>
+              </CardContent>
+            </Card>
+          </SentCard>
+          
+          )}
           {/* <PhoneNumber score={this.state.score} tweetContent={this.props.tweetContent} userName={this.props.userName} /> */}
         </div>
 

@@ -82,3 +82,19 @@ p .calculate:visited {
 } */
 
 
+.sentiments {
+  background-color: #fb8500;
+  color: #023047;
+  font-weight: 800;
+}
+
+.sent-header {
+  background-color: #ffb703;
+  color: #023047;
+}
+
+.thumbs {
+  color: #023047;
+}
+
+

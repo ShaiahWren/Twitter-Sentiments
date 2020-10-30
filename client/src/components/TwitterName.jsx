@@ -123,7 +123,7 @@ class TwitterName extends Component {
     })
     this.getTweet()
     this.setState({ userName: this.state.userName, tweetSpinner: true });
-    setTimeout(() => { this.setState({ tweetSpinner: false }) }, 3000);
+    setTimeout(() => { this.setState({ tweetSpinner: false }) }, 1000);
   }
 
 
